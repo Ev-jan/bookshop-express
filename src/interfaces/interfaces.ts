@@ -60,4 +60,29 @@
 //     userId: string,
 //     ratingValue: number,
 //   }
-  
+
+import { Author, Book, Category, Currency } from "@prisma/client";
+
+export interface ICreateBookPayload {
+    book: Omit<Book, "id">,
+    authorsIds: number[],
+    categoriesIds: number[],
+    currency: Pick<Currency, "shortName">,
+}
+
+const method = {
+    get: "get",
+    post: "post",
+    put: "put",
+    delete: "delete",
+    patch: "patch"
+    } as const;
+
+type ObjectValues<T> = T[keyof T]
+export type MethodName = ObjectValues<typeof method>
+
+export interface IJwtPayload {
+    userId: number; 
+    email: string;
+    iat: number; 
+  }
